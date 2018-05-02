@@ -23,7 +23,7 @@ def sierpinski (a, b, c, n):
 	turtle.goto(mid_b)
 	turtle.goto(mid_a)
 	turtle.goto(mid_c)
-	while n > 0 :
+	if n > 0 :
 	    sierpinski(c, mid_c, mid_b, n-1)
 	    sierpinski(b, mid_a, mid_b, n-1)
 	    sierpinski(a, mid_c, mid_a, n-1)
@@ -37,4 +37,5 @@ def draw_triangle(a, b, c):
 	turtle.goto(c)
 	turtle.goto(a)
 
+draw_triangle(a, b, c)
 sierpinski(a, b, c, 5)
