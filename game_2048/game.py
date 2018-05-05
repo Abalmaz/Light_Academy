@@ -1,4 +1,19 @@
 import curses
+
+def draw_field(field):
+    for x in range(0, 21, 5):
+        for sy in range(1, 8, 2):
+            field.addstr(sy, x,u'\u2502')
+
+    for y in range(0, 10, 2):
+        if y == 0:
+            field.addstr(0, 0, u'\u250C' + (u'\u252C').join([u'\u2500' * 4]*4) + u'\u2510')
+        elif y == 8:
+            field.addstr(8, 0, u'\u2514' + (u'\u2534').join([u'\u2500' * 4]*4) + u'\u2518')
+        else:   
+            field.addstr(y, 0, u'\u251C' + (u'\u253C').join([u'\u2500' * 4]*4) + u'\u2524')
+
+
 class Game:
     def move_left(self):
         raise NotImplementedError
@@ -19,26 +34,7 @@ class Game:
         raise NotImplementedError
 
     def get_field(self):
-        stdscr = curses.initscr()
-
-        #Properly initialize the screen
-        curses.noecho()
-        curses.cbreak()
-        curses.curs_set(0)
-
-        #Check and begin color support
-        if curses.has_colors():
-        	curses.start_color()
-
-        stdscr.addstr(curses.LINES-1, 0, "Press 'Q' ro quit")
-        game_window = curses.newwin(curses.LENES-2, curses.COLS, 1, 0)
-
-        while True:
-
-        	c = quote_window.getch()
-        		
-        	if c == ord('q') or c == ord('Q'):
-        		break	
+        
 
 
 def main():
@@ -89,4 +85,4 @@ def main():
 
 
 if __name__ ==  '__main__':
-    main()
+    curses.wrapper(main)
