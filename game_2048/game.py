@@ -21,91 +21,60 @@ class Game:
             number = 2 if random.random() < 0.9 else 4
             random_cell = empty_cells[random.randrange(0, len(empty_cells))]
             self.matrix[random_cell[0]][random_cell[1]] = number
+        return self.matrix    
+
+    def move_zero(self):
+        for y, row in enumerate(self.matrix):
+            for x in range(3, -1, -1):
+                if row[x] == 0:
+                    row.append(row.pop(x))
+        return self.matrix                         
+   
+
+    def revers_matrix(self):
+        new_matrix = [[value for x, value in enumerate(reversed(row))] for row in self.matrix]
+        return new_matrix
+
+    def tranponse_matrix(self):
+        trans_matrix = [list(i) for i in zip(*self.matrix)]
+        return trans_matrix              
                         
 
     def move_left(self):
-        raise NotImplementedError
+        move_zero(self.matrix)
+        for row in self.matrix:
+            for x in range(4):
+                if x<3 and row[x] == row[x+1]:
+                    row[x], row[x+1] = row[x]*2, 0
+                    self.score += row[x]*2
+        move_zero(self.matrix)
+        self.moves += 1
+        return self.matrix
 
     def move_right(self):
-        raise NotImplementedError
+        reversed_matrix = revers_matrix(self.matrix)
+        move_left(reversed_matrix)
+        self.matrix = revers_matrix(reversed_matrix)
+        return self.matrix
 
     def move_up(self):
-        raise NotImplementedError
+        tr_matrix = tranponse_matrix(self.matrix)
+        move_left(tr_matrix)
+        self.matrix = tranponse_matrix(tr_matrix)
+        return self.matrix
 
     def move_down(self):
-        raise NotImplementedError
+        tr_matrix = tranponse_matrix(self.matrix)
+        tr_matrix = move_right(tr_matrix)
+        self.matrix = tranponse_matrix(tr_matrix)
+        return self.matrix
+     
 
     def has_moves(self):
-        raise NotImplementedError
+        if get_empty_cell(self):
+            return True
 
     def get_score(self):
-        raise NotImplementedError
+        return self.score
           
 
-def draw_field(stdscr, matrix):
-    # Clear and refresh the screen for a blank canvas
-    stdscr.clear()
-    stdscr.refresh()
-
-    # Start colors in curses
-    curses.start_color()
-    height, width = stdscr.getmaxyx()
-
-    curses.curs_set(False)
-    title = "2048"
-    statusbarstr = "Press 'q' to exit"
-
-    # Render status bar
-    stdscr.addstr(height-1, 0, statusbarstr)
-    stdscr.addstr(height-1, len(statusbarstr), " " * (width - len(statusbarstr) - 1))
-
-    # Render title
-    stdscr.attron(curses.A_BOLD)
-    stdscr.addstr(1, width//2 - len(title)//2, title)
-
-    # Render field
-    field = curses.newpad(9, 29) 
-
-    for x in range(0, 21, 5):
-        for sy in range(1, 8, 2):
-            field.addstr(sy, x,u'\u2502')
-
-    for y in range(0, 10, 2):
-        if y == 0:
-            field.addstr(0, 0, u'\u250C' + (u'\u252C').join([u'\u2500' * 4]*4) + u'\u2510')
-        elif y == 8:
-            field.addstr(8, 0, u'\u2514' + (u'\u2534').join([u'\u2500' * 4]*4) + u'\u2518')
-        else:   
-            field.addstr(y, 0, u'\u251C' + (u'\u253C').join([u'\u2500' * 4]*4) + u'\u2524')
-    
-    for y, row in enumerate(matrix):
-        for x, value in enumerate(row):
-            field.addstr(1 + 2*y, 1 + 5*x, str(value if value else '').center(4))
-
-
-    field.refresh(0, 0, 5,40, 14, 69)
-    stdscr.refresh()
-
-    running = True
-    while  running:
-        k = stdscr.getch()
-
-        if k == ord('q') or k == 27:
-            running = False
-            break
-
-
-def main():
-    game = Game()
-    game.add_number()
-    game.add_number()
-    #curses.wrapper(draw_field, game.matrix)
-    for y, row in enumerate(game.matrix):
-        for x, value in enumerate(row):
-            print(y, x, value)
-            
-        #print(game.matrix[y])
-
-
-if __name__ == "__main__":
-    main()
