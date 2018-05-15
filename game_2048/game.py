@@ -1,4 +1,5 @@
 import curses
+import random
 
 class Game:
     def __init__(self):
@@ -6,27 +7,42 @@ class Game:
         self.score = 0
         self.moves = 0
 
-        def move_left(self):
-            raise NotImplementedError
+    def get_empty_cell(self):
+        empty = []
+        for y, row in enumerate(self.matrix):
+            for x, value in enumerate(row):
+                if value == 0:
+                    empty.append([y, x])
+        return empty
+        
+    def add_number(self):
+        empty_cells = self.get_empty_cell()
+        if empty_cells:
+            number = 2 if random.random() < 0.9 else 4
+            random_cell = empty_cells[random.randrange(0, len(empty_cells))]
+            self.matrix[random_cell[0]][random_cell[1]] = number
+                        
 
-        def move_right(self):
-            raise NotImplementedError
+    def move_left(self):
+        raise NotImplementedError
 
-        def move_up(self):
-            raise NotImplementedError
+    def move_right(self):
+        raise NotImplementedError
 
-        def move_down(self):
-            raise NotImplementedError
+    def move_up(self):
+        raise NotImplementedError
 
-        def has_moves(self):
-            raise NotImplementedError
+    def move_down(self):
+        raise NotImplementedError
 
-        def get_score(self):
-            raise NotImplementedError
+    def has_moves(self):
+        raise NotImplementedError
 
-matrix = [[0 for x in range(4)]for y in range(4)]
+    def get_score(self):
+        raise NotImplementedError
+          
 
-def draw_field(stdscr):
+def draw_field(stdscr, matrix):
     # Clear and refresh the screen for a blank canvas
     stdscr.clear()
     stdscr.refresh()
@@ -80,7 +96,11 @@ def draw_field(stdscr):
 
 
 def main():
-    curses.wrapper(draw_field)
+    game = Game()
+    game.add_number()
+    game.add_number()
+    curses.wrapper(draw_field, game.matrix)
+
 
 if __name__ == "__main__":
     main()
