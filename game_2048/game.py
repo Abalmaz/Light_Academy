@@ -99,7 +99,12 @@ def main():
     game = Game()
     game.add_number()
     game.add_number()
-    curses.wrapper(draw_field, game.matrix)
+    #curses.wrapper(draw_field, game.matrix)
+    for y, row in enumerate(game.matrix):
+        for x, value in enumerate(row):
+            print(y, x, value)
+            
+        #print(game.matrix[y])
 
 
 if __name__ == "__main__":
