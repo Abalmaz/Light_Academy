@@ -101,11 +101,12 @@ class Renderer:
                 break
 
     def game_over(self):
-        self.stdscr.clear()
-
-        self.stdscr.attron(curses.A_BOLD)
-        self.stdscr.addstr(1, 1, 'Game over')
-        self.stdscr.addstr(1, 1, 'Your score was %s' % (self.game.score)) 
+        # height, width = self.stdscr.getmaxyx()        
+        # self.stdscr.addstr(4, 0, 'You lost!'.center(width) )
+        curses.endwin()
+        print("You lost!")
+        print("Your score was %s" % self.game.score)
+        exit(0)
 
     def render(self):
         while self.game.has_moves():
