@@ -76,46 +76,5 @@ class Game:
           
 
     def get_score(self):
-        return self.score
-
-game = Game()
-
-game.add_number()
-
-
-print('add number')
-for y, row in enumerate(game.matrix):
-    for x, value in enumerate(row):
-        print(value, end = ' ')
-    print()
-
-game.move_left()
-print('move left')
-for y, row in enumerate(game.matrix):
-    for x, value in enumerate(row):
-        print(value, end = ' ')
-    print()
-
-game.move_right()
-print('move right')
-for y, row in enumerate(game.matrix):
-    for x, value in enumerate(row):
-        print(value, end = ' ')
-    print()
-
-game.move_up()
-print('move up')
-for y, row in enumerate(game.matrix):
-    for x, value in enumerate(row):
-        print(value, end = ' ')
-    print()         
-
-game.move_down()
-print('move down')
-for y, row in enumerate(game.matrix):
-    for x, value in enumerate(row):
-        print(value, end = ' ')
-    print()  
-
-  
+        return self.score 
 

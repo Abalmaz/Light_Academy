@@ -45,10 +45,9 @@ class Renderer:
         # Render title
         self.stdscr.attron(curses.A_BOLD)
         self.stdscr.addstr(1, width//2 - len(title)//2, title)
-        #self.stdscr.refresh()
 
-
-
+        self.stdscr.addstr(4, 0, "Moves: %i" % (self.game.moves), curses.A_BOLD)
+        self.stdscr.addstr(6, 0, "Score: %i" % (self.game.score), curses.A_BOLD)        
         self.stdscr.keypad(True)
 
         for x in range(0, 21, 5):
@@ -67,7 +66,7 @@ class Renderer:
             for x, value in enumerate(row):
                 self.field.addstr(1 + 2*y, 1 + 5*x, str(value if value else '').center(4), curses.color_pair(value))
 
-        self.field.refresh(0, 0, 5,40, 14, 69)
+        self.field.refresh(0, 0, 8, 1, 20, 40)
         self.stdscr.refresh()
 
   
@@ -101,8 +100,12 @@ class Renderer:
                 self.game.add_number()
                 break
 
-    def game_over():
-        pass    
+    def game_over(self):
+        self.stdscr.clear()
+
+        self.stdscr.attron(curses.A_BOLD)
+        self.stdscr.addstr(1, 1, 'Game over')
+        self.stdscr.addstr(1, 1, 'Your score was %s' % (self.game.score)) 
 
     def render(self):
         while self.game.has_moves():
