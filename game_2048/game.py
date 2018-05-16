@@ -31,50 +31,91 @@ class Game:
         return self.matrix                         
    
 
-    def revers_matrix(self):
-        new_matrix = [[value for x, value in enumerate(reversed(row))] for row in self.matrix]
+    def revers_matrix(self, matrix):
+        new_matrix = [[value for x, value in enumerate(reversed(row))] for row in matrix]
         return new_matrix
 
-    def tranponse_matrix(self):
-        trans_matrix = [list(i) for i in zip(*self.matrix)]
+    def transponse_matrix(self, matrix):
+        trans_matrix = [list(i) for i in zip(*matrix)]
         return trans_matrix              
                         
 
-    def move_left(self):
-        move_zero(self.matrix)
+    def move_left(self, matrix = None):
+        self.move_zero()
         for row in self.matrix:
             for x in range(4):
                 if x<3 and row[x] == row[x+1]:
                     row[x], row[x+1] = row[x]*2, 0
                     self.score += row[x]*2
-        move_zero(self.matrix)
+        self.move_zero()
         self.moves += 1
         return self.matrix
 
     def move_right(self):
-        reversed_matrix = revers_matrix(self.matrix)
-        move_left(reversed_matrix)
-        self.matrix = revers_matrix(reversed_matrix)
+        self.matrix = self.revers_matrix(self.matrix)       
+        self.move_left()
+        self.matrix = self.revers_matrix(self.matrix)
         return self.matrix
 
     def move_up(self):
-        tr_matrix = tranponse_matrix(self.matrix)
-        move_left(tr_matrix)
-        self.matrix = tranponse_matrix(tr_matrix)
+        self.matrix = self.transponse_matrix(self.matrix)
+        self.move_left()
+        self.matrix = self.transponse_matrix(self.matrix)
         return self.matrix
 
     def move_down(self):
-        tr_matrix = tranponse_matrix(self.matrix)
-        tr_matrix = move_right(tr_matrix)
-        self.matrix = tranponse_matrix(tr_matrix)
+        self.matrix = self.transponse_matrix(self.matrix)
+        self.move_right()
+        self.matrix = self.transponse_matrix(self.matrix)
         return self.matrix
      
 
     def has_moves(self):
-        if get_empty_cell(self):
+        if self.get_empty_cell():
             return True
+          
 
     def get_score(self):
         return self.score
-          
+
+game = Game()
+
+game.add_number()
+
+
+print('add number')
+for y, row in enumerate(game.matrix):
+    for x, value in enumerate(row):
+        print(value, end = ' ')
+    print()
+
+game.move_left()
+print('move left')
+for y, row in enumerate(game.matrix):
+    for x, value in enumerate(row):
+        print(value, end = ' ')
+    print()
+
+game.move_right()
+print('move right')
+for y, row in enumerate(game.matrix):
+    for x, value in enumerate(row):
+        print(value, end = ' ')
+    print()
+
+game.move_up()
+print('move up')
+for y, row in enumerate(game.matrix):
+    for x, value in enumerate(row):
+        print(value, end = ' ')
+    print()         
+
+game.move_down()
+print('move down')
+for y, row in enumerate(game.matrix):
+    for x, value in enumerate(row):
+        print(value, end = ' ')
+    print()  
+
+  
 

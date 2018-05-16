@@ -2,31 +2,35 @@ import curses
 from game import Game
 
 class Renderer:
-    def __init__(self, game):
-        self.stdscr = curses.initscr()
+    def __init__(self, game, stdscr=None):
+        self.stdscr = stdscr
         self.game = game
         self.field = curses.newpad(9, 29)
 
-    def draw_table(self, stdscr):
+
+    def draw_field(self):
         # Clear and refresh the screen for a blank canvas
         self.stdscr.clear()
         self.stdscr.refresh()
-
-        # Start colors in curses
-        curses.start_color()
-        height, width = stdscr.getmaxyx()
+        height, width = self.stdscr.getmaxyx()
 
         curses.curs_set(False)
         title = "2048"
         statusbarstr = "Press 'q' to exit"
 
         # Render status bar
-        stdscr.addstr(height-1, 0, statusbarstr)
-        stdscr.addstr(height-1, len(statusbarstr), " " * (width - len(statusbarstr) - 1))
+        self.stdscr.addstr(height-1, 0, statusbarstr)
+        self.stdscr.addstr(height-1, len(statusbarstr), " " * (width - len(statusbarstr) - 1))
 
         # Render title
-        stdscr.attron(curses.A_BOLD)
-        stdscr.addstr(1, width//2 - len(title)//2, title)
+        self.stdscr.attron(curses.A_BOLD)
+        self.stdscr.addstr(1, width//2 - len(title)//2, title)
+        #self.stdscr.refresh()
+
+        # Start colors in curses
+        curses.start_color()
+
+        self.stdscr.keypad(True)
 
         for x in range(0, 21, 5):
             for sy in range(1, 8, 2):
@@ -47,23 +51,54 @@ class Renderer:
         self.field.refresh(0, 0, 5,40, 14, 69)
         self.stdscr.refresh()
 
-        running = True
-        while  running:
+  
+    def get_key(self):
+        while  True:
+            
             k = self.stdscr.getch()
 
             if k == ord('q') or k == 27:
-                running = False
-                break        
+                curses.endwin()
+                exit()
+                break
+                                            
+            if k == ord('w'):
+                self.game.move_up()
+                self.game.add_number()
+                break
+        
+            if k == ord('s'):
+                self.game.move_down()
+                break
+        
+            if k == ord('a'):
+                self.game.move_left()
+                break
+            
+            if k == ord('d'):
+                self.game.move_right()
+                break
 
-def main():
+    def game_over():
+        pass    
+
+    def render(self):
+        while self.game.has_moves():
+            self.draw_field()
+            self.get_key()    
+
+
+                                                        
+
+def draw_game(stdscr):
     game = Game()
     game.add_number()
     game.add_number()
-    renderer = Renderer(game)
-    curses.wrapper(renderer.draw_table)
-    # game.add_number()
-    # game.add_number()
-    #curses.wrapper(renderer.draw_table)
+    render = Renderer(game, stdscr)
+    render.render()
+
+def main():
+    curses.wrapper(draw_game)
 
 if __name__ == "__main__":
     main()
