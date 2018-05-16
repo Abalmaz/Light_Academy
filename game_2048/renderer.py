@@ -64,7 +64,7 @@ class Renderer:
 
         for y, row in enumerate(self.game.matrix):
             for x, value in enumerate(row):
-                self.field.addstr(1 + 2*y, 1 + 5*x, str(value if value else '').center(4), curses.color_pair(value))
+                self.field.addstr(1 + 2*y, 1 + 5*x, str(value if value else '').center(4))
 
         self.field.refresh(0, 0, 8, 1, 20, 40)
         self.stdscr.refresh()
