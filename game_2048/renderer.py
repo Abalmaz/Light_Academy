@@ -2,6 +2,19 @@ import curses
 from game import Game
 
 class Renderer:
+    COLOR_THEME = [
+        # (foreground, background)
+        (curses.COLOR_WHITE, curses.COLOR_BLACK), 
+        (curses.COLOR_YELLOW, curses.COLOR_BLACK),
+        (curses.COLOR_RED, curses.COLOR_BLACK),
+        (curses.COLOR_MAGENTA, curses.COLOR_BLACK),
+        (curses.COLOR_BLUE, curses.COLOR_BLACK),
+        (curses.COLOR_CYAN, curses.COLOR_BLACK),
+        (curses.COLOR_GREEN, curses.COLOR_BLACK), 
+        (curses.COLOR_YELLOW, curses.COLOR_WHITE),
+        (curses.COLOR_RED, curses.COLOR_WHITE),
+        (curses.COLOR_MAGENTA, curses.COLOR_WHITE),
+    ]
     def __init__(self, game, stdscr=None):
         self.stdscr = stdscr
         self.game = game
@@ -12,6 +25,13 @@ class Renderer:
         # Clear and refresh the screen for a blank canvas
         self.stdscr.clear()
         self.stdscr.refresh()
+
+        # Start colors in curses
+        curses.start_color()
+
+        for i, color_pair in enumerate(self.COLOR_THEME):
+            curses.init_pair(1 + i, *color_pair)
+
         height, width = self.stdscr.getmaxyx()
 
         curses.curs_set(False)
@@ -27,8 +47,7 @@ class Renderer:
         self.stdscr.addstr(1, width//2 - len(title)//2, title)
         #self.stdscr.refresh()
 
-        # Start colors in curses
-        curses.start_color()
+
 
         self.stdscr.keypad(True)
 
@@ -46,7 +65,7 @@ class Renderer:
 
         for y, row in enumerate(self.game.matrix):
             for x, value in enumerate(row):
-                self.field.addstr(1 + 2*y, 1 + 5*x, str(value if value else '').center(4))
+                self.field.addstr(1 + 2*y, 1 + 5*x, str(value if value else '').center(4), curses.color_pair(value))
 
         self.field.refresh(0, 0, 5,40, 14, 69)
         self.stdscr.refresh()
@@ -69,14 +88,17 @@ class Renderer:
         
             if k == ord('s'):
                 self.game.move_down()
+                self.game.add_number()
                 break
         
             if k == ord('a'):
                 self.game.move_left()
+                self.game.add_number()
                 break
             
             if k == ord('d'):
                 self.game.move_right()
+                self.game.add_number()
                 break
 
     def game_over():
@@ -85,7 +107,8 @@ class Renderer:
     def render(self):
         while self.game.has_moves():
             self.draw_field()
-            self.get_key()    
+            self.get_key()
+        self.game_over()        
 
 
                                                         
