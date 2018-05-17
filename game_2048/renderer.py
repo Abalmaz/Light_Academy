@@ -5,7 +5,6 @@ from game import Game
 class Renderer:
     COLOR_THEME = [
         # (foreground, background)
-        (curses.COLOR_RED, curses.COLOR_WHITE),     #512 
         (curses.COLOR_WHITE, curses.COLOR_BLACK),   #2
         (curses.COLOR_YELLOW, curses.COLOR_BLACK),  #4
         (curses.COLOR_RED, curses.COLOR_BLACK),     #8
@@ -48,12 +47,11 @@ class Renderer:
         curses.start_color()
 
         if curses.has_colors():
-            # if curses.COLORS != 256:
-            #     color = Renderer.COLOR_THEME
-            # else:
-            #     color = Renderer.COLOR_256    
+            if curses.COLORS != 256:
+                color = Renderer.COLOR_THEME
+            else:
+                color = Renderer.COLOR_256    
 
-            color = Renderer.COLOR_256
             for i, color_pair in enumerate(color, 1):
                 curses.init_pair(i, *color_pair)
 
