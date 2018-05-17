@@ -1,20 +1,38 @@
+from math import log
 import curses
 from game import Game
 
 class Renderer:
     COLOR_THEME = [
         # (foreground, background)
-        (curses.COLOR_WHITE, curses.COLOR_BLACK), 
-        (curses.COLOR_YELLOW, curses.COLOR_BLACK),
-        (curses.COLOR_RED, curses.COLOR_BLACK),
-        (curses.COLOR_MAGENTA, curses.COLOR_BLACK),
-        (curses.COLOR_BLUE, curses.COLOR_BLACK),
-        (curses.COLOR_CYAN, curses.COLOR_BLACK),
-        (curses.COLOR_GREEN, curses.COLOR_BLACK), 
-        (curses.COLOR_YELLOW, curses.COLOR_WHITE),
-        (curses.COLOR_RED, curses.COLOR_WHITE),
-        (curses.COLOR_MAGENTA, curses.COLOR_WHITE),
+        (curses.COLOR_RED, curses.COLOR_WHITE),     #512 
+        (curses.COLOR_WHITE, curses.COLOR_BLACK),   #2
+        (curses.COLOR_YELLOW, curses.COLOR_BLACK),  #4
+        (curses.COLOR_RED, curses.COLOR_BLACK),     #8
+        (curses.COLOR_MAGENTA, curses.COLOR_BLACK), #16
+        (curses.COLOR_BLUE, curses.COLOR_BLACK),    #32
+        (curses.COLOR_CYAN, curses.COLOR_BLACK),    #64
+        (curses.COLOR_GREEN, curses.COLOR_BLACK),   #128
+        (curses.COLOR_YELLOW, curses.COLOR_WHITE),  #256
+        (curses.COLOR_RED, curses.COLOR_WHITE),     #512 
+        (curses.COLOR_MAGENTA, curses.COLOR_WHITE), #1024
+        (curses.COLOR_BLUE, curses.COLOR_WHITE),    #2048
     ]
+
+    COLOR_256 = [
+        (7, 0),
+        (6, 0),
+        (4, 0),
+        (5, 0),
+        (1, 0),
+        (3, 0),
+        (2, 0),
+        (6, 7),
+        (4, 7),
+        (5, 7),
+        (1, 7),
+    ]    
+
     def __init__(self, game, stdscr=None):
         self.stdscr = stdscr
         self.game = game
@@ -29,8 +47,15 @@ class Renderer:
         # Start colors in curses
         curses.start_color()
 
-        for i, color_pair in enumerate(self.COLOR_THEME):
-            curses.init_pair(1 + i, *color_pair)
+        if curses.has_colors():
+            # if curses.COLORS != 256:
+            #     color = Renderer.COLOR_THEME
+            # else:
+            #     color = Renderer.COLOR_256    
+
+            color = Renderer.COLOR_256
+            for i, color_pair in enumerate(color, 1):
+                curses.init_pair(i, *color_pair)
 
         height, width = self.stdscr.getmaxyx()
 
@@ -64,7 +89,7 @@ class Renderer:
 
         for y, row in enumerate(self.game.matrix):
             for x, value in enumerate(row):
-                self.field.addstr(1 + 2*y, 1 + 5*x, str(value if value else '').center(4))
+                self.field.addstr(1 + 2*y, 1 + 5*x, str(value if value else '').center(4), curses.color_pair(int(log(value,2)) if value else 1))
 
         self.field.refresh(0, 0, 8, 1, 20, 40)
         self.stdscr.refresh()
@@ -104,7 +129,7 @@ class Renderer:
         # height, width = self.stdscr.getmaxyx()        
         # self.stdscr.addstr(4, 0, 'You lost!'.center(width) )
         curses.endwin()
-        print("You lost!")
+        print("You lose!")
         print("Your score was %s" % self.game.score)
         exit(0)
 
