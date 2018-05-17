@@ -1,55 +1,25 @@
-from abc import ABCMeta
-'''
-класс для всех, счет времени для восстанавления
-'''
-class Clock:
-    def __init__(self):
-        self.i = i
-    def tick(self):
-        self.i += 1
-    def time(self):
-        return self.i    
+from abc import ADCMeta
 
-class Unit(metaclass = ABCMeta):
-	
-    '''
-      при аттаке приплюсовываем время для воостановления
-      target.take_demage()
-      self._recharge_to = self.clock.time()+1000
-      активны все у кого recharge <= текущего времени   
-    '''
-    @abstractmethod
-    def attack(self, target):
-        pass
-    
-    @abstractmethod
-    def take_demage(self, dmg):
-        pass
+class Unit(metaclass=ABCMeta):
+	def __init__(self, health = 100, recharge, attack_success = None, damage = None):
+		self.health = health
+		self.recharge = recharge
+		self._attack_success = attack_success
+		self._damage = damage
 
-    @property
-    @abstractmethod
-    def alive(self):
-        pass
+	@property
+	@abstractmethod
+	def attack_success(self):
+		pass
 
-    @property
-    @abstractmethod
-    def health(self):
-        pass
+	@property
+	@abstractmethod
+	def damage(self):
+		pass
 
-    @property
-    @abstractmethod
-    def attack_power(self):
-        pass
+	@abstractmethod
+	def is_live(self):
+	    pass	
 
-    '''
-    когда recharge == 0 можно аттаковать
-    '''
-    @property
-    @abstractmethod
-    def recharge(self):
-        pass
 
-    '''
-    
-    '''
-                	
+		
