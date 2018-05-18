@@ -4,7 +4,7 @@ from soldier import Soldier
 
 class Vehicle(Unit):
 	def __init__(self, health, reacharge, attack_success = None, damage = None, count_operators = 3)
-	    super().__init__(health, reacharge, _attack_success, _damage)
+	    super().__init__(_health, reacharge, _attack_success, _damage)
 	    self.count_operators = count_operators
 	    self.operators = [Soldier() for _ in range count_operators]
 	    self._total_health
@@ -40,7 +40,7 @@ class Vehicle(Unit):
 		проверяем после каждой атаки
 		'''
 
-	def damage_inflicted(self, damage):
+	def damage_received(self, damage):
 	    '''
 	    60% of the total damage is inflicted on the vehicle
 		20% of the total damage is inflicted on a random vehicle operator

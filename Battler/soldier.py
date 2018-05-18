@@ -1,9 +1,10 @@
 from random import randint
 from unit import Unit
+from clock import Clock as clock
 
 class Soldier(Unit):
-	def __init__(self, health, reacharge = None, attack_success = None, damage = None, experince = 0):
-		super().__init__(health, reacharge, _attack_success, _damage)
+	def __init__(self, health, reacharge = None, attack_success = None, damage = None, time_reacharge = None, experince = 0):
+		super().__init__(_health, reacharge, _attack_success, _damage, time_reacharge)
 		self._experience = experience
 
 	experience = property()
@@ -30,4 +31,10 @@ class Soldier(Unit):
 	    return self._damage
 
 	def is_live(self):
-	    return health            	    	
+	    return health
+
+
+	def damage_received(self, damage):
+	    self.health -= damage
+		
+	                         	    	

@@ -1,11 +1,12 @@
 from abc import ADCMeta
 
 class Unit(metaclass=ABCMeta):
-	def __init__(self, health = 100, recharge, attack_success = None, damage = None):
+	def __init__(self, health = 100, recharge, attack_success = None, damage = None, time_recharge = None):
 		self._health = health
 		self.recharge = recharge
 		self._attack_success = attack_success
 		self._damage = damage
+		self.time_recharge = time_recharge
 
 	health = property()
 
@@ -23,6 +24,13 @@ class Unit(metaclass=ABCMeta):
 	    return self._health	        	
 
 
+	def is_reacharge(self):
+		if self.time_reacharge:
+			if clock.is_time(self.time_reacharge):
+				return True
+		return False
+
+	
 	@property
 	@abstractmethod
 	def attack_success(self):
@@ -38,11 +46,7 @@ class Unit(metaclass=ABCMeta):
 	    pass
 
 	@abstractmethod
-	def is_reacharge(self):
-	    pass
-
-	@abstractmethod
-	def damage_inflicted(self, damage)::
+	def damage_received(self, damage)::
 	    pass	    	    	
 
 
