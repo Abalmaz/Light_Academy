@@ -4,13 +4,13 @@ from soldier import Soldier
 from clock import Clock as clock
 
 class Vehicle(Unit):
-    def __init__(self, health = 100, reacharge = 1000, count_operators = 3):
+    def __init__(self, health, reacharge, count_operators, operators):
         self._health = health
         self._reacharge = reacharge
         self._attack_success = None
         self._damage = None
         self.count_operators = count_operators
-        self.operators = [Soldier() for _ in range (count_operators)]
+        self.operators = operators
         self._total_health = None
         self.time_reacharge = None
 

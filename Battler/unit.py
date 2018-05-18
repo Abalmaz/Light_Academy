@@ -20,10 +20,4 @@ class Unit(metaclass=ABCMeta):
     def damage_received(self, damage):
         pass
 
-
-    @abstractmethod
-    def is_reacharge(self):
-        pass
-
-
         

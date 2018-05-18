@@ -4,13 +4,10 @@ from vehicle import Vehicle
 from clock import Clock as clock
 
 class Squad(Unit):
-    def __init__(self, type ='soldiers', count_units):
+    def __init__(self, types, count_units, units):
         self.count_units = count_units
-        self.type = type
-        if type == 'soldiers':
-            self.units = [Soldier() for _ in range count_units]
-        elif type == 'vehicles':
-            self.units = [Vehicles() for _ in range count_units]
+        self.type = types
+        self.units = units
         self._attack_success = None
         self._damage = None
 

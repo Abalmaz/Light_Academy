@@ -3,11 +3,13 @@ from random import randint
 from clock import Clock as clock
 
 class Vehicle():
-    def __init__(self, health, count_operator, recharge):
+    def __init__(self, health, count_operator, recharge, operators):
         self.health = health
         self.count_operator = count_operator
         self.recharge = recharge
-        self.operators = [Soldier() for _ in range (count_operator)]
+        self.operators = operators
+
+        #self.operators = [for arg in argv]
         self.time_reacharge = None
 
 
@@ -48,9 +50,15 @@ class Vehicle():
 
         self.check_operators()  
 
+operators = []
+oper1 = Soldier()
+oper2 = Soldier()
+oper3 = Soldier()
+operators.append(oper1)
+operators.append(oper2)
+operators.append(oper3)
 
-
-vehicle = Vehicle(100, 2, 100)
+vehicle = Vehicle(100, 2, 100, operators)
 vehicle.damage_received(100)
 
 for n in range(vehicle.count_operator):

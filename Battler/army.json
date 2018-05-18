@@ -1,0 +1,47 @@
+{
+	"armies":[
+		{
+			"name": "USA",
+			"strategy": "weakest",
+			"squads":[
+				{
+					"type": "soldiers",
+					"count_units": 3,
+					"units":[{
+						"health": 100,
+						"recharge": 100						
+						},
+						{
+						"health": 100,
+						"recharge": 100						
+						},
+						{
+						"health": 100,
+						"recharge": 100						
+						}
+					]
+				},
+				{
+					"type": "vehicles",
+					"count_units": 1,
+					"units":[{
+						"health": 100,
+						"recharge": 1000,
+						"count_operators": 2,
+						"operators":[
+							{
+								"health": 100,
+								"recharge": 100
+							},
+							{
+								"health": 100,
+								"recharge": 100
+							}							
+						]
+					}
+					]
+				}
+			]
+		}
+	]
+}

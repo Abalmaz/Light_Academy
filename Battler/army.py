@@ -4,7 +4,7 @@ from squad import Squad
 from clock import Clock as clock
 
 class Army:
-    def __init__(self, name, strategy):
+    def __init__(self, name, strategy, squads):
         self.name = name
         self.strategy = strategy
-        self.squads = []
+        self.squads = squads

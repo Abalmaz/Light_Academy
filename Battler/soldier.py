@@ -3,7 +3,7 @@ from unit import Unit
 from clock import Clock as clock
 
 class Soldier(Unit):
-    def __init__(self, health = 100, recharge = 100, experience = 0):
+    def __init__(self, health, recharge, experience = 0):
         self._health = health
         self._recharge = recharge
         self._attack_success = None
