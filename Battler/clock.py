@@ -10,7 +10,7 @@ class Clock():
 	    return duration
 
 	@staticmethod
-	def recharge_time(recharge):
+	def set_time(recharge):
 	    return time.time() + recharge
 
 	@staticmethod
