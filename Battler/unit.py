@@ -2,10 +2,26 @@ from abc import ADCMeta
 
 class Unit(metaclass=ABCMeta):
 	def __init__(self, health = 100, recharge, attack_success = None, damage = None):
-		self.health = health
+		self._health = health
 		self.recharge = recharge
 		self._attack_success = attack_success
 		self._damage = damage
+
+	health = property()
+
+	@health.setter
+	def health(self, value):
+		if value <= 0:
+			self._health = 0
+		elif value >= 100:
+		    self._health = 100
+		else:
+		    self._health = value
+
+	@health.getter
+	def health(self):
+	    return self._health	        	
+
 
 	@property
 	@abstractmethod
@@ -19,7 +35,15 @@ class Unit(metaclass=ABCMeta):
 
 	@abstractmethod
 	def is_live(self):
-	    pass	
+	    pass
+
+	@abstractmethod
+	def is_reacharge(self):
+	    pass
+
+	@abstractmethod
+	def damage_inflicted(self, damage)::
+	    pass	    	    	
 
 
 		
