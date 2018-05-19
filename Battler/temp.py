@@ -1,3 +1,17 @@
+
+# import functools
+# def logger(func):
+#     @functools.wraps(func)
+#     def wrapped(*args, **kwargs):
+#         result = func(*args, **kwargs)
+#         with open('log.txt', 'w') as f:
+#             f.write(str(result))
+
+#         return result    
+#     return wrapped
+
+
+
 from soldier import Soldier
 from random import randint
 from clock import Clock as clock
