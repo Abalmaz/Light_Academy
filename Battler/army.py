@@ -8,3 +8,5 @@ class Army:
         self.name = name
         self.strategy = strategy
         self.squads = squads
+
+    	    

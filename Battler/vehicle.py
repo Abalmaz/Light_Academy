@@ -2,17 +2,19 @@ from random import randint
 from unit import Unit
 from soldier import Soldier
 from clock import Clock as clock
+from harmonic_mean import harmonic_mean
+
 
 class Vehicle(Unit):
     def __init__(self, health, reacharge, count_operators, operators):
         self._health = health
         self._reacharge = reacharge
-        self._attack_success = None
-        self._damage = None
+        self._attack_success = 0
+        self._damage = 0
         self.count_operators = count_operators
         self.operators = operators
-        self._total_health = None
-        self.time_reacharge = None
+        self._total_health = 0
+        self.time_reacharge = 0
 
     health = property()
 
@@ -56,10 +58,10 @@ class Vehicle(Unit):
     
     @property
     def attack_success(self):
-        operators_attack = 1
+        operators_attack = []
         for n in range(self.count_operators):
-            operators_attack *= self.operators[n].attack_success            
-        operator_attack_succes = pow(operators_attack, 1 / len(self.count_operators))   
+            operators_attack.append(self.operators[n].attack_success)            
+        operator_attack_succes = harmonic_mean(operators_attack)   
         self._attack_success = 0.5 * (1 + self.health / 100) * operator_attack_succes
         return self._attack_success
 

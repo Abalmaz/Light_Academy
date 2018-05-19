@@ -2,22 +2,23 @@ from unit import Unit
 from soldier import Soldier
 from vehicle import Vehicle
 from clock import Clock as clock
+from harmonic_mean import harmonic_mean
 
 class Squad(Unit):
     def __init__(self, types, count_units, units):
         self.count_units = count_units
         self.type = types
         self.units = units
-        self._attack_success = None
-        self._damage = None
+        self._attack_success = 0.0
+        self._damage = 0
 
     
     @property
     def attack_success(self):
-        units_attack = 1
+        units_attack = []        
         for n in range(self.count_units):
-            units_attack *= self.units[n].attack_success            
-        self._attack_succes = pow(units_attack, 1 / len(self.count_units))  
+            units_attack.append(self.units[n].attack_success)           
+        self._attack_success = harmonic_mean(units_attack)  
         return self._attack_success
 
     @property

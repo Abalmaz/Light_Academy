@@ -6,9 +6,9 @@ class Soldier(Unit):
     def __init__(self, health, recharge, experience = 0):
         self._health = health
         self._recharge = recharge
-        self._attack_success = None
-        self._damage = None
-        self.time_recharge = None
+        self._attack_success = 0
+        self._damage = 0
+        self.time_recharge = 0
         self._experience = experience
 
     health = property()

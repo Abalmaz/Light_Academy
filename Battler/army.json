@@ -42,6 +42,64 @@
 					]
 				}
 			]
-		}
+		},
+		{
+			"name": "Canada",
+			"strategy": "strongest",
+			"squads":[
+				{
+					"type": "soldiers",
+					"count_units": 2,
+					"units":[{
+						"health": 100,
+						"recharge": 100						
+						},
+						{
+						"health": 100,
+						"recharge": 100						
+						}
+					]
+				},
+				{
+					"type": "vehicles",
+					"count_units": 2,
+					"units":[{
+						"health": 100,
+						"recharge": 1000,
+						"count_operators": 2,
+						"operators":[
+							{
+								"health": 100,
+								"recharge": 100
+							},
+							{
+								"health": 100,
+								"recharge": 100
+							}							
+						]
+					},
+					{
+						"health": 100,
+						"recharge": 2000,
+						"count_operators": 3,
+						"operators":[
+							{
+								"health": 100,
+								"recharge": 100
+							},
+							{
+								"health": 100,
+								"recharge": 300
+							},
+							{
+								"health": 100,
+								"recharge": 200
+							}														
+						]
+					}
+					]
+				}
+			]
+		}		
 	]
 }
