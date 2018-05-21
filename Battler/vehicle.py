@@ -44,7 +44,7 @@ class Vehicle(Unit):
 
     @reacharge.getter
     def reacharge(self):
-        return self._recharge       
+        return self._reacharge       
 
 
     @property
@@ -100,12 +100,12 @@ class Vehicle(Unit):
 
         range_operator = randint(0, self.count_operators - 1)
         for n in range(self.count_operators):
-            if count_operators == 3:
+            if self.count_operators == 3:
                 if range_operator == n:
                     self.operators[n].damage_received(damage * 0.2)
                 else:
                     self.operators[n].damage_received(damage * 0.1)
-            elif count_operators == 2:
+            elif self.count_operators == 2:
                 if range_operator == n:
                     self.operators[n].damage_received(damage * 0.3)
                 else:

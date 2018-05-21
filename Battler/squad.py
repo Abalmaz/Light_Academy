@@ -9,7 +9,7 @@ class Squad(Unit):
         self.count_units = count_units
         self.type = types
         self.units = units
-        self._attack_success = 0.0
+        self._attack_success = 0
         self._damage = 0
 
     
@@ -49,7 +49,7 @@ class Squad(Unit):
         damage_part = damage / self.count_units
 
         for n in range(self.count_units):
-            self.count_units[n].damage_received(damage_part)
+            self.units[n].damage_received(damage_part)
 
         self.check_units()  
 
