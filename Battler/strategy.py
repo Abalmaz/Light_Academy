@@ -3,10 +3,13 @@ from random import randint
 def weakest(armies):
     target_squad = []
     for n in range(len(armies)):
-       for i in range(len(armies[n].squads )-1):
-            target_squad = armies[n].squads[i]
-            if armies[n].squads[i + 1].attack_success > target_squad.attack_success:
-                target_squad = armies[n].squads[i + 1]        
+        if len(armies[n].squads) == 1:
+            target_squad = armies[n].squads[0]
+        elif len(armies[n].squads) > 1 :     
+            for i in range(len(armies[n].squads )-1):
+                target_squad = armies[n].squads[i]
+                if armies[n].squads[i + 1].attack_success > target_squad.attack_success:
+                    target_squad = armies[n].squads[i + 1]               
 
     return target_squad    
 
@@ -14,17 +17,20 @@ def weakest(armies):
 def strongest(armies):
     target_squad = []
     for n in range(len(armies)):
-       for i in range(len(armies[n].squads)-1):
-            target_squad = armies[n].squads[i]
-            if armies[n].squads[i + 1].attack_success < target_squad.attack_success:
-                target_squad = armies[n].squads[i + 1]
+        if len(armies[n].squads) == 1:
+           target_squad = armies[n].squads[0]
+        elif len(armies[n].squads) > 1 :   
+            for i in range(len(armies[n].squads)-1): 
+                target_squad = armies[n].squads[i]
+                if armies[n].squads[i + 1].attack_success < target_squad.attack_success:
+                    target_squad = armies[n].squads[i + 1]         
 
     return target_squad              
 
 def random(armies):
-    army = randint(0, len(armies - 1))
-    squad = randint(0, len(army.squrds - 1))
-    target_squad = armies[army][squad]
+    army = randint(0, len(armies)-1)
+    squad = randint(0, len(armies[army].squads)-1)
+    target_squad = armies[army].squads[squad]
     
     return target_squad
 
@@ -39,13 +45,13 @@ def choise_target(attacking_army, armies):
         target = weakest(target_armies)
      
 
-
     elif attacking_army.strategy == 'strongest':
         target = strongest(target_armies)        
 
 
     else:
-        target = random(target_armies)        
+        target = random(target_armies)
+
 
     return target       
 

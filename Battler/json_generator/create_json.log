@@ -1,0 +1,36 @@
+generator.py[2018-05-22 23:37:53,050]  Creats 6 armies: 
+generator.py[2018-05-22 23:37:53,050]  		'USA' with 4 squads:
+generator.py[2018-05-22 23:37:53,050]  				1. type 'vehicles' with 8 units
+generator.py[2018-05-22 23:37:53,050]  				2. type 'soldiers' with 9 units
+generator.py[2018-05-22 23:37:53,051]  				3. type 'vehicles' with 6 units
+generator.py[2018-05-22 23:37:53,051]  				4. type 'vehicles' with 9 units
+generator.py[2018-05-22 23:37:53,051]  		'Israel' with 6 squads:
+generator.py[2018-05-22 23:37:53,051]  				1. type 'soldiers' with 6 units
+generator.py[2018-05-22 23:37:53,051]  				2. type 'vehicles' with 5 units
+generator.py[2018-05-22 23:37:53,051]  				3. type 'vehicles' with 10 units
+generator.py[2018-05-22 23:37:53,051]  				4. type 'vehicles' with 9 units
+generator.py[2018-05-22 23:37:53,052]  				5. type 'soldiers' with 10 units
+generator.py[2018-05-22 23:37:53,052]  				6. type 'soldiers' with 5 units
+generator.py[2018-05-22 23:37:53,052]  		'France' with 5 squads:
+generator.py[2018-05-22 23:37:53,052]  				1. type 'vehicles' with 9 units
+generator.py[2018-05-22 23:37:53,052]  				2. type 'soldiers' with 7 units
+generator.py[2018-05-22 23:37:53,052]  				3. type 'soldiers' with 9 units
+generator.py[2018-05-22 23:37:53,052]  				4. type 'soldiers' with 8 units
+generator.py[2018-05-22 23:37:53,052]  				5. type 'soldiers' with 5 units
+generator.py[2018-05-22 23:37:53,052]  		'Germany' with 4 squads:
+generator.py[2018-05-22 23:37:53,053]  				1. type 'vehicles' with 10 units
+generator.py[2018-05-22 23:37:53,053]  				2. type 'soldiers' with 8 units
+generator.py[2018-05-22 23:37:53,053]  				3. type 'soldiers' with 6 units
+generator.py[2018-05-22 23:37:53,053]  				4. type 'vehicles' with 6 units
+generator.py[2018-05-22 23:37:53,053]  		'Italy' with 6 squads:
+generator.py[2018-05-22 23:37:53,053]  				1. type 'soldiers' with 8 units
+generator.py[2018-05-22 23:37:53,053]  				2. type 'vehicles' with 7 units
+generator.py[2018-05-22 23:37:53,053]  				3. type 'soldiers' with 7 units
+generator.py[2018-05-22 23:37:53,054]  				4. type 'soldiers' with 9 units
+generator.py[2018-05-22 23:37:53,054]  				5. type 'soldiers' with 9 units
+generator.py[2018-05-22 23:37:53,054]  				6. type 'vehicles' with 6 units
+generator.py[2018-05-22 23:37:53,054]  		'Canada' with 4 squads:
+generator.py[2018-05-22 23:37:53,054]  				1. type 'soldiers' with 10 units
+generator.py[2018-05-22 23:37:53,054]  				2. type 'vehicles' with 7 units
+generator.py[2018-05-22 23:37:53,054]  				3. type 'soldiers' with 6 units
+generator.py[2018-05-22 23:37:53,054]  				4. type 'vehicles' with 5 units

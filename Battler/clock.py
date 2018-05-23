@@ -6,18 +6,15 @@ class Clock():
 
     def duration_of_games(self):
         current_time = time.time()
-        duration = current_time - self.start_game
+        duration = time.strftime("%H:%M:%S", time.gmtime(current_time - self.start_game))
         return duration
 
-    @staticmethod
-    def set_time(recharge):
-        return time.time() + recharge
 
-    @staticmethod
-    def is_time(time_recharge):
-        current_time - time.time()
-        delta = current_time - time_recharge
-        if delta >= 0:
-            return True
-        else:
-            return False            
+def set_time(recharge):
+    return time.time() + recharge
+
+
+def is_time(time_recharge):
+    current_time = time.time()
+    delta = current_time - time_recharge
+    return True if delta >= 0 else False

@@ -6,36 +6,33 @@
 			"squads":[
 				{
 					"type": "soldiers",
-					"count_units": 3,
 					"units":[{
 						"health": 100,
-						"recharge": 100						
+						"recharge": 10						
 						},
 						{
 						"health": 100,
-						"recharge": 100						
+						"recharge": 10						
 						},
 						{
 						"health": 100,
-						"recharge": 100						
+						"recharge": 10					
 						}
 					]
 				},
 				{
 					"type": "vehicles",
-					"count_units": 1,
 					"units":[{
 						"health": 100,
 						"recharge": 1000,
-						"count_operators": 2,
 						"operators":[
 							{
 								"health": 100,
-								"recharge": 100
+								"recharge": 10
 							},
 							{
 								"health": 100,
-								"recharge": 100
+								"recharge": 10
 							}							
 						]
 					}
@@ -49,51 +46,47 @@
 			"squads":[
 				{
 					"type": "soldiers",
-					"count_units": 2,
 					"units":[{
 						"health": 100,
-						"recharge": 100						
+						"recharge": 10					
 						},
 						{
 						"health": 100,
-						"recharge": 100						
+						"recharge": 10					
 						}
 					]
 				},
 				{
 					"type": "vehicles",
-					"count_units": 2,
 					"units":[{
 						"health": 100,
-						"recharge": 1000,
-						"count_operators": 2,
+						"recharge": 100,
 						"operators":[
 							{
 								"health": 100,
-								"recharge": 100
+								"recharge": 10
 							},
 							{
 								"health": 100,
-								"recharge": 100
+								"recharge": 10
 							}							
 						]
 					},
 					{
 						"health": 100,
-						"recharge": 2000,
-						"count_operators": 3,
+						"recharge": 200,
 						"operators":[
 							{
 								"health": 100,
-								"recharge": 100
+								"recharge": 10
 							},
 							{
 								"health": 100,
-								"recharge": 300
+								"recharge": 30
 							},
 							{
 								"health": 100,
-								"recharge": 200
+								"recharge": 20
 							}														
 						]
 					}

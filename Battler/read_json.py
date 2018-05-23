@@ -21,7 +21,7 @@ def craete_class_from_json(file):
 				for unit in squad['units']:
 					unit = Soldier(health = unit['health'], recharge = unit['recharge'])
 					units.append(unit)
-				squads.append(Squad(squad['type'], squad['count_units'], units))		
+				squads.append(Squad(squad['type'], units))		
 
 			elif squad['type'] == 'vehicles':
 				units = []
@@ -29,8 +29,8 @@ def craete_class_from_json(file):
 					operators = []
 					for operator in unit['operators']:
 						operators.append(Soldier(operator['health'], operator['recharge']))
-					units.append(Vehicle(unit['health'], unit['recharge'], unit['count_operators'], operators))
-				squads.append(Squad(squad['type'], squad['count_units'], units))
+					units.append(Vehicle(unit['health'], unit['recharge'], operators))
+				squads.append(Squad(squad['type'], units))
 		
 		army = Army(army['name'], army['strategy'], squads)
 		armies.append(army)
