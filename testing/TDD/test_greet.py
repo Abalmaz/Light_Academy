@@ -11,11 +11,12 @@ class TestClassGreeter(unittest.TestCase):
 	@patch('greeter.datetime')	
 	def test_trim(self, mock_time):
 		mock_time.now.return_value.hour = 20
-	    self.assertEqual(Greeter.greet("  Ivan  "), "Добрый вечер Ivan")
+		self.assertEqual(Greeter.greet("  Ivan  "), "Добрый вечер Ivan")
 
 	@patch('greeter.datetime')
 	def test_upper(self, mock_time):
-	    self.assertEqual(Greeter.greet("ivan"), "Добрый вечер Ivan")
+		mock_time.now.return_value.hour = 20
+		self.assertEqual(Greeter.greet("ivan"), "Добрый вечер Ivan")
 
 	@patch('greeter.datetime')
 	def test_good_morning(self, mock_time):
@@ -30,5 +31,10 @@ class TestClassGreeter(unittest.TestCase):
 	@patch('greeter.datetime')
 	def test_good_night(self, mock_time):
 		mock_time.now.return_value.hour = 23
-		self.assertEqual(Greeter.greet("Ivan"), "Доброй ночи Ivan")		  		    		
+		self.assertEqual(Greeter.greet("Ivan"), "Доброй ночи Ivan")
+
+	@patch('greeter.logging')
+	def test_logging_greet(self, mock_logger):
+		name = Greeter.greet("Ivan")
+		mock_logger.info.assert_called_with('You greeting with Ivan')
 
