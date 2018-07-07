@@ -7,16 +7,30 @@
 <body>
     <ul>
    {% for task in tasks %}
-        <li><input type="checkbox"  {% if task.checked %} checked {% endif %} /></li>
-        <a href="tasks/{{task.id}}">{{ task.text }}</a>
+        <li><input type="checkbox"  {% if task.checked %} checked {% endif %} />
+        <a href="{{task.id}}">{{ task.text }}</a>
         </li>
     {% endfor %}
     </ul>
 
-    <form method="post" action="tasks/create">
+    <form method="post">
         {% csrf_token %}
-        <input type="checkbox" name="checked" />
-        <input  type="text" name="text" />
+        {{form}}
+
+            <!--<div class="wrapper">-->
+                <!--<label for="{{form.text.id_for_label}}"></label>-->
+                <!--<input id="{{form.text.id_for_label}}" value="{{form.text.value}}" name="{{form.text.html_name}}">-->
+                <!--{% if form.text.field.max_length %}-->
+                    <!--max_length="{{ form.text.field.max_length }}"-->
+                <!--{% endif %}-->
+                <!--<ul>-->
+                    <!--{% for error in field.errors %}-->
+                    <!--<li>{{ error | escape }}</li>-->
+                    <!--{% endfor %}-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--&lt;!&ndash;{% for field in form %}&ndash;&gt;-->
+        <!--&lt;!&ndash;{% endfor %}&ndash;&gt;-->
         <button type="submit">Save</button>
     </form>
 </body>

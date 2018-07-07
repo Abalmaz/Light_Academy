@@ -15,12 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls import url, include
 from myapp import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^tasks$', views.index),
-    url(r'^tasks/create$', views.create_task),
-    url(r'^tasks/(?P<pk>[0-9a-f\-]+)$', views.detail),
+    url(r'^tasks/$', views.TaskListView.as_view()),
+    # url(r'^tasks/create$', views.create_task),
+    url(r'^tasks/(?P<pk>[0-9a-f\-]+)$', views.detail, name='view'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
