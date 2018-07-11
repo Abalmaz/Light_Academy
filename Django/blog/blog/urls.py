@@ -17,12 +17,22 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from posts import views
+from rest_framework.routers import DefaultRouter
 from django.conf.urls.i18n import i18n_patterns
 
+router = DefaultRouter()
+router.register(r'categories', views.CategoryViewSet)
+
 urlpatterns = [
+    url(r'^', include(router.urls)),
+    url(r'^posts/$', views.PostsList.as_view()),
+    url(r'^post/(?P<pk>[0-9]+)/$', views.PostDetail.as_view()),
+    url(r'^api-auth/', include('rest_framework.urls')),
+
     path('admin/', admin.site.urls),
-    path('', views.index),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
+    # path('', views.index),
+    # url(r'^i18n/', include('django.conf.urls.i18n')),
+
 ]
 
 
